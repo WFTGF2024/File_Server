@@ -15,8 +15,8 @@ export const useFileStore = defineStore('file', () => {
     loading.value = true
     try {
       const res = await getFileList()
-      // 后端直接返回数组，所以直接使用 res
-      files.value = Array.isArray(res) ? res : (res.data || [])
+      // 后端返回格式: { success: true, files: [...], pagination: {...} }
+      files.value = res.files || []
       return files.value
     } catch (error) {
       console.error('获取文件列表失败:', error)

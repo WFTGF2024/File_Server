@@ -59,7 +59,8 @@ export const useMembershipStore = defineStore('membership', () => {
     loading.value = true
     try {
       const res = await getMembershipLevels()
-      levels.value = res.data || []
+      // 后端返回格式: { success: true, levels: [...] }
+      levels.value = res.levels || []
       return levels.value
     } catch (error) {
       console.error('获取会员等级失败:', error)
